@@ -2,8 +2,22 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        replacement = array.max
-        array.map { |num| num.positive? ? replacement : num }
+        result = []
+        replacement = find_max_value(array)
+
+        array.each do |num|
+          new_value = num.positive? ? replacement : num
+          result << new_value
+        end
+        result
+      end
+
+      def find_max_value(array)
+        max_value = array.first
+        for elem in array
+          max_value = elem if elem > max_value
+        end
+        max_value
       end
 
       def search(haystack, needle)
