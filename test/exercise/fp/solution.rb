@@ -19,8 +19,11 @@ module Exercise
         country_row.is_a?(String) ? country_row.strip.split(',').length : 0
       end
 
-      def chars_count(_films, _threshold)
-        0
+      def chars_count(films, threshold)
+        search_char = 'и'
+        films.map { |film| { name: film['name'], rating: film['rating_kinopoisk'].to_f } }
+             .map { |film| film[:rating] >= threshold ? film[:name].count(search_char) : 0 }
+             .reduce(&:+)
       end
     end
   end
