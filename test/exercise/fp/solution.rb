@@ -5,14 +5,12 @@ module Exercise
       # film["name"], film["rating_kinopoisk"], film["rating_imdb"],
       # film["genres"], film["year"], film["access_level"], film["country"]
       def rating(films)
-        result = films
-                 .map { |film| { countries_count: count_countries(film['country']), rating: film['rating_kinopoisk'].to_f } }
-                 .select { |film| film[:countries_count] >= 2 && film[:rating].positive? }
-                 .each_with_object({ rating_sum: 0, count: 0 }) do |film, acc|
-          acc[:rating_sum] += film[:rating]
-          acc[:count] += 1
-        end
-        result[:rating_sum] / result[:count]
+        sum, count = films.map { |film| { countries_count: count_countries(film['country']), rating: film['rating_kinopoisk'].to_f } }
+                          .select { |elem|  elem[:rating].positive? && elem[:countries_count] >= 2 }
+                          .reduce([0, 0]) { |acc, elem| [acc[0] + elem[:rating], acc[1] + 1] }
+        return 0 if count.zero?
+
+        sum / count
       end
 
       def count_countries(country_row)
