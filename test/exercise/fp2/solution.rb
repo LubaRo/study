@@ -12,7 +12,11 @@ module Exercise
       end
 
       # Написать свою функцию my_map
-      def my_map; end
+      def my_map(&block)
+        new_arr = self.class.new
+        my_each { |elem| new_arr << block.call(elem) }
+        new_arr
+      end
 
       # Написать свою функцию my_compact
       def my_compact; end
