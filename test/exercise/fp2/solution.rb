@@ -13,9 +13,8 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map(&block)
-        new_arr = self.class.new
-        my_each { |elem| new_arr << block.call(elem) }
-        new_arr
+        func = ->(acc, elem) { acc << block.call(elem) }
+        my_reduce(self.class.new, &func)
       end
 
       # Написать свою функцию my_compact
