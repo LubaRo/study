@@ -19,7 +19,11 @@ module Exercise
       end
 
       # Написать свою функцию my_compact
-      def my_compact; end
+      def my_compact
+        new_arr = self.class.new
+        my_each { |elem| new_arr << elem if !elem.nil? }
+        new_arr
+      end
 
       # Написать свою функцию my_reduce
       def my_reduce; end
