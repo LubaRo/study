@@ -26,7 +26,16 @@ module Exercise
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce; end
+      def my_reduce(acc = nil, &block)
+        if acc.nil?
+          acc = first
+          arr = self[1..-1]
+        else
+          arr = dup
+        end
+        arr.my_each { |elem| acc = block.call(acc, elem) }
+        acc
+      end
     end
   end
 end
