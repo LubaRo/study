@@ -20,9 +20,11 @@ module Exercise
 
       # Написать свою функцию my_compact
       def my_compact
-        new_arr = self.class.new
-        my_each { |elem| new_arr << elem unless elem.nil? }
-        new_arr
+        func = lambda { |acc, elem|
+          acc << elem unless elem.nil?
+          acc
+        }
+        my_reduce(self.class.new, &func)
       end
 
       # Написать свою функцию my_reduce
