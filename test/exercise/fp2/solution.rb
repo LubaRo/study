@@ -21,7 +21,7 @@ module Exercise
       # Написать свою функцию my_compact
       def my_compact
         new_arr = self.class.new
-        my_each { |elem| new_arr << elem if !elem.nil? }
+        my_each { |elem| new_arr << elem unless elem.nil? }
         new_arr
       end
 
